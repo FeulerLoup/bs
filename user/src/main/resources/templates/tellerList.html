@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>管理后台 - 用户列表</title>
+
+    <!-- Custom fonts for this template-->
+    <link th:href="@{vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+
+    <!-- Page level plugin CSS-->
+    <link th:href="@{vendor/datatables/dataTables.bootstrap4.css}" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link th:href="@{css/sb-admin.css}" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+<!--Navbar-->
+<div th:replace="comm::navbar"></div>
+
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <div th:replace="comm::sidebar"></div>
+
+    <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="index">主页</a>
+                </li>
+                <li class="breadcrumb-item active">用户列表</li>
+            </ol>
+
+            <!-- Teller List -->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fas fa-table"></i>
+                    用户详细列表
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>用户号</th>
+                                <th>用户名称</th>
+                                <th>用户等级</th>
+                                <th>用户状态</th>
+                                <th>最后更新人</th>
+                                <th>最后更新时间</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <th>用户号</th>
+                                <th>用户名称</th>
+                                <th>用户等级</th>
+                                <th>用户状态</th>
+                                <th>最后更新人</th>
+                                <th>最后更新时间</th>
+                                <th>操作</th>
+                            </tr>
+                            </tfoot>
+                            <tbody>
+                            <tr th:each="tlr:${session.tellerList}">
+                                <td th:text="${tlr.tlrNo}"></td>
+                                <td th:text="${tlr.tlrName}"></td>
+                                <td th:switch="${tlr.LvlNo}">
+                                    <div th:case="0"><p>注销</p></div>
+                                    <div th:case="1"><p>冻结</p></div>
+                                    <div th:case="2"><p>客户</p></div>
+                                    <div th:case="3"><p>用户</p></div>
+                                    <div th:case="4"><p>管理员</p></div>
+                                </td>
+                                <td th:switch="${tlr.tlrSts}">
+                                    <div th:case="N"><p>正常</p></div>
+                                    <div th:case="C"><p>注销</p></div>
+                                    <div th:case="F"><p>冻结</p></div>
+                                </td>
+                                <td th:text="${tlr.updTlr}"></td>
+                                <td th:text="${tlr.dateTime}"></td>
+                                <td>
+                                    <div onclick="this.getElementsByTagName('form')[0].submit()">
+                                        <button class="btn btn-primary" th:text="修改"></button>
+                                        <form action="tellerMod" method="post" th:id="${tlr.tlrNo}">
+                                            <input type="hidden" name="tlrNo" th:value="${tlr.tlrNo}">
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer small text-muted" th:text="'更新于 ' + ${session.dateTime}"></div>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- /.container-fluid -->
+
+    <!-- Sticky Footer -->
+    <div th:replace="comm::footer"></div>
+
+</div>
+<!-- /.content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div th:replace="comm::logout"></div>
+
+<!-- Bootstrap core JavaScript-->
+<script th:src="@{vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+<!-- Core plugin JavaScript-->
+<script th:src="@{vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+<!-- Page level plugin JavaScript-->
+<script th:src="@{vendor/datatables/jquery.dataTables.js}"></script>
+<script th:src="@{vendor/datatables/dataTables.bootstrap4.js}"></script>
+
+<!-- Custom scripts for all pages-->
+<script th:src="@{js/sb-admin.min.js}"></script>
+
+<!-- Demo scripts for this page-->
+<script th:src="@{js/demo/datatables-demo.js}"></script>
+
+</body>
+
+</html>

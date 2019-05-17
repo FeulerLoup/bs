@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>管理后台 - 权限管理</title>
+
+    <!-- Custom fonts for this template-->
+    <link th:href="@{vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+
+    <!-- Page level plugin CSS-->
+    <link th:href="@{vendor/datatables/dataTables.bootstrap4.css}" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link th:href="@{css/sb-admin.css}" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+<!--Navbar-->
+<div th:replace="comm::navbar"></div>
+
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <div th:replace="comm::sidebar"></div>
+
+    <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="index">主页</a>
+                </li>
+                <li class="breadcrumb-item active">权限管理</li>
+            </ol>
+
+
+            <!--Permission List-->
+            <h4>请点击需要修改的权限等级</h4>
+            <a class="btn btn-info" href="newPermission">新增</a>
+            <br>
+            <div class="card-columns">
+                <div class="card" onclick="this.getElementsByTagName('form')[0].submit()"
+                     th:each="permission:${session.permissionList}">
+                    <div class="card-header"th:text="'权限等级：' + ${permission.lvlNo}"></div>
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="'最后修改：' + ${permission.updTlr}"></h5>
+                        <p class="card-text" th:text="'金融操作权限：' + ${permission.ciFinancial}"></p>
+                        <p class="card-text" th:text="'客户级 查询权限：' + ${permission.ciInq}"></p>
+                        <p class="card-text" th:text="'用户级 查询权限：' + ${permission.tlrInq}"></p>
+                        <p class="card-text" th:text="'管理级 查询权限：' + ${permission.suInq}"></p>
+                        <p class="card-text" th:text="'客户级 修改权限：' + ${permission.ciMod}"></p>
+                        <p class="card-text" th:text="'用户级 修改权限：' + ${permission.tlrMod}"></p>
+                        <p class="card-text" th:text="'管理级 修改权限：' + ${permission.suMod}"></p>
+                        <p class="card-text" th:text="'用户级 复核权限：' + ${permission.tlrAp}"></p>
+                        <p class="card-text" th:text="'管理级 复核权限：' + ${permission.suAp}"></p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted" th:text="'最后更新于：' + ${permission.dateTime}"></small>
+                    </div>
+                    <form action="permissionMod" method="post" th:id="${permission.lvlNo}">
+                        <input type="hidden" name="lvlNo" th:value="${permission.lvlNo}">
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        <div th:replace="comm::footer"></div>
+
+    </div>
+    <!-- /.content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div th:replace="comm::logout"></div>
+
+<!--Submit Form-->
+<script type="text/javascript">
+    function sub(id) {
+        alert(id);
+        var trueid = id;
+        alert(trueid);
+
+        $("#trueid").submit();
+        document.getElementById(trueid).submit();
+    }
+</script>
+
+<!-- Bootstrap core JavaScript-->
+<script th:src="@{vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+<!-- Core plugin JavaScript-->
+<script th:src="@{vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+<!-- Page level plugin JavaScript-->
+<script th:src="@{vendor/chart.js/Chart.min.js}"></script>
+<script th:src="@{vendor/datatables/jquery.dataTables.js}"></script>
+<script th:src="@{vendor/datatables/dataTables.bootstrap4.js}"></script>
+
+<!-- Custom scripts for all pages-->
+<script th:src="@{js/sb-admin.min.js}"></script>
+
+<!-- Demo scripts for this page-->
+<script th:src="@{js/demo/datatables-demo.js}"></script>
+<script th:src="@{js/demo/chart-area-demo.js}"></script>
+
+</body>
+
+</html>

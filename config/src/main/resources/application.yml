@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: config
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/FeulerLoup/bs
+          username: *DELETED*
+          password: *DELETED*
+  rabbitmq:
+    addresses: bs.feuler.cn
+    username: *DELETED*
+    password: *DELETED*
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka1.bs.feuler.cn:8761/eureka/,http://eureka2.bs.feuler.cn:8762/eureka/,http://eureka3.bs.feuler.cn:8763/eureka/
+  instance:
+    prefer-ip-address: true
+    ip-address: "${HOST:127.0.0.1}"
+
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

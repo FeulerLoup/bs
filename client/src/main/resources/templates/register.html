@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>用户中心 - 注册</title>
+
+    <!-- Custom fonts for this template-->
+    <link th:href="@{vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template-->
+    <link th:href="@{css/sb-admin.css}" rel="stylesheet">
+
+</head>
+
+<body class="bg-dark">
+
+<div class="container">
+    <div class="card card-register mx-auto mt-5">
+        <div class="card-header">注册</div>
+        <div class="card-body">
+            <form action="doRegister" method="post">
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <div class="form-label-group">
+                                <input type="text" name="firstName" id="firstName" class="form-control"
+                                       placeholder="姓" required="required" autofocus="autofocus">
+                                <label for="firstName">姓</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-label-group">
+                                <input type="text" name="lastName" id="lastName" class="form-control"
+                                       placeholder="名" required="required">
+                                <label for="lastName">名</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-label-group">
+                        <input type="text" name="ciNo" id="inputCiNo" class="form-control" placeholder="用户号"
+                               required="required" oninput="this.value=this.value.replace(/[^0-9.]+/,'');">
+                        <label for="inputCiNo">用户号</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-label-group">
+                        <input type="text" name="ciAddress" id="inputCiAddress" class="form-control" placeholder="地址"
+                               required="required">
+                        <label for="inputCiAddress">地址</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-label-group">
+                        <input type="text" name="ciPhone" id="inputCiPhone" class="form-control" placeholder="电话"
+                               required="required" oninput="this.value=this.value.replace(/[^0-9.]+/,'');">
+                        <label for="inputCiPhone">电话</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <div class="form-label-group">
+                                <input type="password" name="ciPasswd" id="inputPassword" class="form-control"
+                                       placeholder="密码" required="required">
+                                <label for="inputPassword">密码</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-label-group">
+                                <input type="password" name="ciPasswdConfirm" id="confirmPassword" class="form-control"
+                                       placeholder="确认密码" required="required">
+                                <label for="confirmPassword">确认密码</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="submit" class="btn btn-primary btn-block" value="注册">
+            </form>
+            <div class="text-center">
+                <a class="d-block small mt-3" href="login">登录页面</a>
+                <a class="d-block small" href="forgot">忘记密码?</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript-->
+<script th:src="@{vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+<!-- Core plugin JavaScript-->
+<script th:src="@{vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+</body>
+
+</html>

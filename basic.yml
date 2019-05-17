@@ -1,0 +1,27 @@
+spring:
+  rabbitmq:
+    addresses: bs.feuler.cn
+    username: *DELETED*
+    password: *DELETED*
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: *DELETED*
+    password: *DELETED*
+    url: jdbc:mysql://db.bs.feuler.cn:61255/final?serverTimezone=GMT%2B8&characterEncoding=utf-8&useSSL=false
+  jpa:
+    show-sql: true
+    database: mysql
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka1.bs.feuler.cn:8761/eureka/,http://eureka2.bs.feuler.cn:8762/eureka/,http://eureka3.bs.feuler.cn:8763/eureka/
+  instance:
+    prefer-ip-address: true
+
+ribbon:
+  ConnectTimeout: 10000
+  ReadTimeout: 10000
+    
+server:
+  port: 8081

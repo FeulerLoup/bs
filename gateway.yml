@@ -1,0 +1,22 @@
+spring:
+  rabbitmq:
+    addresses: bs.feuler.cn
+    username: *DELETED*
+    password: *DELETED*
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka1.bs.feuler.cn:8761/eureka/,http://eureka2.bs.feuler.cn:8762/eureka/,http://eureka3.bs.feuler.cn:8763/eureka/
+  instance:
+    prefer-ip-address: true
+
+server:
+  port: 80
+
+ribbon:
+  ConnectTimeout: 10000
+  ReadTimeout: 10000
+  
+zuul:
+  sensitive-headers:

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>管理后台 - 流水</title>
+
+    <!-- Custom fonts for this template-->
+    <link th:href="@{vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+
+    <!-- Page level plugin CSS-->
+    <link th:href="@{vendor/datatables/dataTables.bootstrap4.css}" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link th:href="@{css/sb-admin.css}" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+<!--Navbar-->
+<div th:replace="comm::navbar"></div>
+
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <div th:replace="comm::sidebar"></div>
+
+    <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="index">主页</a>
+                </li>
+                <li class="breadcrumb-item active">流水</li>
+            </ol>
+
+            <!-- Financial Records -->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fas fa-table"></i>
+                    账户流水明细
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>流水号</th>
+                                <th>客户号</th>
+                                <th>帐号</th>
+                                <th>操作</th>
+                                <th>金额</th>
+                                <th>接收人客户号</th>
+                                <th>接收人帐号</th>
+                                <th>操作人</th>
+                                <th>日期</th>
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <th>流水号</th>
+                                <th>客户号</th>
+                                <th>帐号</th>
+                                <th>操作</th>
+                                <th>金额</th>
+                                <th>接收人客户号</th>
+                                <th>接收人帐号</th>
+                                <th>操作人</th>
+                                <th>日期</th>
+                            </tr>
+                            </tfoot>
+                            <tbody>
+                            <tr th:each="recs:${session.recList}">
+                                <td th:text="${recs.recNo}"></td>
+                                <td th:text="${recs.ciNo}"></td>
+                                <td th:text="${recs.acNo}"></td>
+                                <td th:switch="${recs.act}">
+                                    <div th:case="D"><p>存款</p></div>
+                                    <div th:case="W"><p>取款</p></div>
+                                    <div th:case="T"><p>转账</p></div>
+                                </td>
+                                <td th:text="${recs.amt}"></td>
+                                <td>
+                                    <div th:if="${recs.recvCiNo} != ''"><p th:text="${recs.recvCiNo}"></p></div>
+                                    <div th:if="${recs.recvCiNo} == ''"><p>无</p></div>
+                                </td>
+                                <td>
+                                    <div th:if="${recs.recvAcNo} != ''"><p th:text="${recs.recvAcNo}"></p></div>
+                                    <div th:if="${recs.recvAcNo} == ''"><p>无</p></div>
+                                </td>
+                                <td th:text="${recs.operator}"></td>
+                                <td th:text="${recs.dateTime}"></td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer small text-muted" th:text="'更新于 ' + ${session.dateTime}"></div>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- /.container-fluid -->
+
+    <!-- Sticky Footer -->
+    <div th:replace="comm::footer"></div>
+
+</div>
+<!-- /.content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div th:replace="comm::logout"></div>
+
+<!-- Bootstrap core JavaScript-->
+<script th:src="@{vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+<!-- Core plugin JavaScript-->
+<script th:src="@{vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+<!-- Page level plugin JavaScript-->
+<script th:src="@{vendor/datatables/jquery.dataTables.js}"></script>
+<script th:src="@{vendor/datatables/dataTables.bootstrap4.js}"></script>
+
+<!-- Custom scripts for all pages-->
+<script th:src="@{js/sb-admin.min.js}"></script>
+
+<!-- Demo scripts for this page-->
+<script th:src="@{js/demo/datatables-demo.js}"></script>
+
+</body>
+
+</html>
